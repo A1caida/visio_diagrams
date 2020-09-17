@@ -1,0 +1,82 @@
+#include <iostream>
+
+#include <ctime>
+
+using namespace std;
+
+int main()
+{
+    srand(time(NULL));
+	int owo[10];
+	for (size_t i = 0; i < 10; i++)
+	{
+		owo[i] = rand() % 10 + 1;
+        cout << owo[i] << endl;
+        
+	}
+    cout << "____________ " << endl;
+    int temp;
+    for (int i = 0; i < 10 - 1; i++) {
+        for (int j = 0; j < 10 - i - 1; j++) {
+            if (owo[j] > owo[j + 1]) {
+                temp = owo[j];
+                owo[j] = owo[j + 1];
+                owo[j + 1] = temp;
+            }
+        }
+    }
+    for (size_t i = 0; i < 10; i++)
+    {
+        //owo[i] = rand() % 10 + 1;
+        cout << owo[i] << endl;
+       
+    }
+    cout << "____________ " << endl;
+
+
+    srand(time(NULL));
+    for (size_t i = 0; i < 10; i++)
+    {
+        owo[i] = rand() % 10 + 1;
+        cout << owo[i] << endl;
+    }
+    cout << "____________ " << endl;
+
+    for (size_t i = 0; i < 10 - 1; i++)
+    {
+        size_t temp = i;
+
+        for (size_t j = i + 1; j < 10; j++)
+        {
+            if (owo[j] < owo[temp])
+            {
+                temp = j;
+            }
+        }
+
+        if (temp != i)
+        {
+            swap(owo[i], owo[temp]);
+        }
+    }
+
+    for (size_t i = 0; i < 10; i++)
+    {
+        //owo[i] = rand() % 10 + 1;
+        cout << owo[i] << endl;
+
+    }
+    cout << "____________ " << endl;
+
+    char uwu[19] = "nobody-noticed-him";
+    char kek[4] = "not";
+   
+    for (size_t i = 0; i < 19 - 3; i++)
+    {
+        if ((uwu[i] == kek[0]) && (uwu[i + 1] == kek[1]) && (uwu[i + 2] == kek[2]))
+        {
+             cout << i << endl;
+        }
+        
+    }
+}
