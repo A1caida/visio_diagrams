@@ -1,9 +1,35 @@
+10
+SELECT                           
+COUNT(`class`) AS 'kek2'    
+from                                
+	timetable                                                                        
+WHERE`date` = '2020-09-18'
+11
+SELECT                           
+COUNT(`class`) AS 'owo'    
+from                                
+	timetable                                                                        
+WHERE`date` >= '2020-09-01' AND `date` <= '2020-12-31' AND `cabinet` = '304'
+12
+SELECT                           
+COUNT(`class`) AS 'owo'    
+from                                
+	timetable                                                                        
+WHERE `cabinet` = '310'
+21
+SELECT                           
+ DISTINCT(`discipline`)
+from                                
+	timetable                                                                        
+ORDER BY CHAR_LENGTH(discipline) DESC
+	LIMIT 1
+
 27
 SELECT                           
  DISTINCT(`discipline`), COUNT(`class`) AS 'lll'    
 from                                
 	timetable                                                                        
-WHERE`date` >= '2020-01-01' AND `date` <= '2020-07-30' AND `discipline` = 'Âûñøàÿ ìàòåìàòèêà' AND `type` ='Ëåêöèÿ' 
+WHERE`date` >= '2020-01-01' AND `date` <= '2020-07-30' AND `discipline` = 'Ð’Ñ‹ÑÑˆÐ°Ñ Ð¼Ð°Ñ‚ÐµÐ¼Ð°Ñ‚Ð¸ÐºÐ°' AND `type` ='Ð›ÐµÐºÑ†Ð¸Ñ' 
 GROUP BY `discipline` 
 ORDER BY lll DESC 
 28
@@ -11,7 +37,7 @@ SELECT
  DISTINCT(`discipline`), COUNT(`class`) AS 'lll'    
 from                                
 	timetable                                                                        
-WHERE`date` >= '2020-01-01' AND `date` <= '2020-07-30' AND `discipline` = 'Âûñøàÿ ìàòåìàòèêà' AND `type` ='Ïðàêòèêà'
+WHERE`date` >= '2020-01-01' AND `date` <= '2020-07-30' AND `discipline` = 'Ð’Ñ‹ÑÑˆÐ°Ñ Ð¼Ð°Ñ‚ÐµÐ¼Ð°Ñ‚Ð¸ÐºÐ°' AND `type` ='ÐŸÑ€Ð°ÐºÑ‚Ð¸ÐºÐ°'
 GROUP BY `discipline` 
 ORDER BY lll DESC
 29
