@@ -1,0 +1,32 @@
+27
+SELECT                           
+ DISTINCT(`discipline`), COUNT(`class`) AS 'lll'    
+from                                
+	timetable                                                                        
+WHERE`date` >= '2020-01-01' AND `date` <= '2020-07-30' AND `discipline` = 'Высшая математика' AND `type` ='Лекция' 
+GROUP BY `discipline` 
+ORDER BY lll DESC 
+28
+SELECT                           
+ DISTINCT(`discipline`), COUNT(`class`) AS 'lll'    
+from                                
+	timetable                                                                        
+WHERE`date` >= '2020-01-01' AND `date` <= '2020-07-30' AND `discipline` = 'Высшая математика' AND `type` ='Практика'
+GROUP BY `discipline` 
+ORDER BY lll DESC
+29
+SELECT                           
+ DISTINCT(`date_of_update`)
+from                                
+	timetable                                                                        
+GROUP BY `date_of_update` 
+ORDER BY date_of_update DESC
+LIMIT 1
+30
+SELECT  `teacher`	          
+
+from                                
+	timetable                                                                        
+WHERE`date` >= '2020-01-01' AND `date` <= '2020-07-30' AND WEEKDAY(`date`)	= 5
+ 
+
