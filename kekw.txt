@@ -1,30 +1,129 @@
-10
+1)
+SELECT                           
+ DISTINCT(`discipline`)
+from                                
+	timetable                                                                        
+WHERE`date` >= '2020-09-25' AND `class` = 'АИСТбд-21' AND `timeStart`> '10:29'	
+2)
+SELECT                           
+ DISTINCT(`teacher`)
+from                                
+	timetable                                                                        
+WHERE`date` >= '2020-09-25' AND `class` = 'АИСТбд-21' AND `timeStart`> '10:29'
+3)
+SELECT
+COUNT(*)
+FROM timetable
+WHERE `teacher` LIKE 'Шишкин%' AND `date` > '2020-01-01' AND `date` < '2020-05-31';
+4)
+SELECT
+COUNT(*)
+FROM timetable
+WHERE `teacher` LIKE 'Чоракаев%';
+5)
+SELECT `discipline`
+FROM timetable
+WHERE `class` = 'АИСТбд-21' AND `date` = CURRENT_DATE();
+6)
+SELECT `discipline`
+FROM timetable
+WHERE `class` = 'АИСТбд-21' AND `date` > '2020-09-14' AND `date` < '2020-09-19';
+7)
+SELECT DISTINCT(`discipline`)
+FROM timetable WHERE `teacher` = 'Егорычев Денис Владимирович'
+AND `date` = '2020-09-18'
+8)
+SELECT `discipline`
+FROM timetable
+WHERE `teacher` LIKE 'Ильязова%' AND `date` > '2020-09-14' AND `date` < '2020-09-19';
+9)
+SELECT `discipline`
+FROM timetable
+WHERE `teacher` LIKE 'Чоракаев%' AND `date` < CURRENT_DATE() AND `timeStop` < CURRENT_TIME()
+ORDER BY `date` ASC
+LIMIT 1;
+10)
 SELECT                           
 COUNT(`class`) AS 'kek2'    
 from                                
 	timetable                                                                        
 WHERE`date` = '2020-09-18'
-11
+11)
 SELECT                           
 COUNT(`class`) AS 'owo'    
 from                                
 	timetable                                                                        
 WHERE`date` >= '2020-09-01' AND `date` <= '2020-12-31' AND `cabinet` = '304'
-12
+12)
 SELECT                           
 COUNT(`class`) AS 'owo'    
 from                                
 	timetable                                                                        
 WHERE `cabinet` = '310'
-21
+13)
+SELECT DISTINCT(`teacher`) AS 'qwerty', COUNT(`discipline`) AS 'qsccsqqsc'
+FROM timetable
+GROUP BY `qwerty`
+ORDER BY `qsccsqqsc` DESC
+LIMIT 1;
+14)
+SELECT DISTINCT(`teacher`) AS 'qwerty', COUNT(DISTINCT(`discipline`)) AS 'qsccsqqsc'
+FROM timetable
+GROUP BY `qwerty`
+ORDER BY `qsccsqqsc` DESC
+LIMIT 1;
+15) 
+SELECT                           
+ DISTINCT(`discipline`), COUNT(`class`) AS 'owo'    
+from                                
+	timetable                                                                        
+GROUP BY `discipline` 
+ORDER BY owo DESC
+LIMIT 1
+16)
+SELECT DISTINCT(`discipline`), `cabinet`
+FROM timetable
+WHERE `cabinet` = '308';
+17)
+SELECT DISTINCT(`teacher`)
+FROM timetable
+WHERE `discipline` = 'Базы данных' AND `date` > '2020-01-01' AND `date` < '2020-05-31';
+18)
+SELECT `discipline`
+FROM timetable
+WHERE `cabinet` AND `date` > '2020-09-17';
+19)
+ SELECT discipline FROM timetable WHERE teacher LIKE 'Корсакова%' 
+20)
+ SELECT                           
+ DISTINCT(`class`)  
+from                                
+	timetable                                                                        
+WHERE teacher LIKE 'Корсакова%' 
+21)
 SELECT                           
  DISTINCT(`discipline`)
 from                                
 	timetable                                                                        
 ORDER BY CHAR_LENGTH(discipline) DESC
 	LIMIT 1
-
-27
+22)
+ SELECT                           
+ DISTINCT(`teacher`)  
+from                                
+	timetable                                                                        
+WHERE `date` >= '2020-09-01' AND `date` <= '2020-12-31'
+23)
+SELECT `class` , `discipline`, `date`
+FROM timetable 
+WHERE `class` = 'АИСТбд-21' AND `discipline` = 'Базы данных' AND `date` > '2020-01-01' AND `date` < '2020-07-15' 
+24)
+ SELECT `discipline` , `cabinet` FROM timetable WHERE `teacher` LIKE `Згуральская%`
+25)
+ SELECT `discipline` FROM timetable WHERE `type` = `Discord`
+26)
+ SELECT `teacher`, `discipline` = `Основы интернет верстки` FROM timetable WHERE `type`
+27)
 SELECT                           
  DISTINCT(`discipline`), COUNT(`class`) AS 'lll'    
 from                                
@@ -32,15 +131,14 @@ from
 WHERE`date` >= '2020-01-01' AND `date` <= '2020-07-30' AND `discipline` = 'Высшая математика' AND `type` ='Лекция' 
 GROUP BY `discipline` 
 ORDER BY lll DESC 
-28
+28)
 SELECT                           
  DISTINCT(`discipline`), COUNT(`class`) AS 'lll'    
 from                                
 	timetable                                                                        
 WHERE`date` >= '2020-01-01' AND `date` <= '2020-07-30' AND `discipline` = 'Высшая математика' AND `type` ='Практика'
-GROUP BY `discipline` 
-ORDER BY lll DESC
-29
+	
+29)
 SELECT                           
  DISTINCT(`date_of_update`)
 from                                
@@ -48,11 +146,11 @@ from
 GROUP BY `date_of_update` 
 ORDER BY date_of_update DESC
 LIMIT 1
-30
+30)
 SELECT  `teacher`	          
 
 from                                
 	timetable                                                                        
-WHERE`date` >= '2020-01-01' AND `date` <= '2020-07-30' AND WEEKDAY(`date`)	= 5
+	 AND `date` <= '2020-07-30' AND WEEKDAY(`date`)	= 5
  
 
