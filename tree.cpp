@@ -1,7 +1,4 @@
 #include <iostream>
-#include<ctype.h>
-#include <stdlib.h>
-#include <conio.h>
 #include <ctime>
 
 using namespace std;
@@ -16,27 +13,68 @@ struct node
 
 typedef struct node* nodeptr;
 
-void insert(int, nodeptr&);
-void del(int, nodeptr&);
-int deletemin(nodeptr&);
-void find(int, nodeptr&);
-nodeptr findmin(nodeptr);
-nodeptr findmax(nodeptr);
-void makeempty(nodeptr&);
-void copy(nodeptr&, nodeptr&);
-nodeptr nodecopy(nodeptr&);
-void preorder(nodeptr);
-void inorder(nodeptr);
-void postorder(nodeptr);
-int bsheight(nodeptr);
-nodeptr srl(nodeptr&);
-nodeptr drl(nodeptr&);
-nodeptr srr(nodeptr&);
-nodeptr drr(nodeptr&);
-int max(int, int);
-int nonodes(nodeptr);
 
-// Inserting a node
+int max(int value1, int value2)
+{
+	return ((value1 > value2) ? value1 : value2);
+}
+int bsheight(nodeptr p)
+{
+	int t;
+	if (p == NULL)
+	{
+		return -1;
+	}
+	else
+	{
+		t = p->height;
+		return t;
+	}
+}
+
+nodeptr srl(nodeptr& p1)
+{
+	nodeptr p2;
+	p2 = p1->left;
+	p1->left = p2->right;
+	p2->right = p1;
+	p1->height = max(bsheight(p1->left), bsheight(p1->right)) + 1;
+	p2->height = max(bsheight(p2->left), p1->height) + 1;
+	return p2;
+}
+nodeptr srr(nodeptr& p1)
+{
+	nodeptr p2;
+	p2 = p1->right;
+	p1->right = p2->left;
+	p2->left = p1;
+	p1->height = max(bsheight(p1->left), bsheight(p1->right)) + 1;
+	p2->height = max(p1->height, bsheight(p2->right)) + 1;
+	return p2;
+}
+nodeptr drl(nodeptr& p1)
+{
+	p1->left = srr(p1->left);
+	return srl(p1);
+}
+nodeptr drr(nodeptr& p1)
+{
+	p1->right = srl(p1->right);
+	return srr(p1);
+}
+
+int nonodes(nodeptr p)
+{
+	int count = 0;
+	if (p != NULL)
+	{
+		nonodes(p->left);
+		nonodes(p->right);
+		count++;
+	}
+	return count;
+}
+
 void insert(int x, nodeptr& p)
 {
 	if (p == NULL)
@@ -156,13 +194,7 @@ void find(int x, nodeptr& p)
 		}
 	}
 }
-// Copy a tree
-void copy(nodeptr& p, nodeptr& p1)
-{
-	makeempty(p1);
-	p1 = nodecopy(p);
-}
-// Make a tree empty
+
 void makeempty(nodeptr& p)
 {
 	nodeptr d;
@@ -175,7 +207,6 @@ void makeempty(nodeptr& p)
 		p = NULL;
 	}
 }
-// Copy the nodes
 nodeptr nodecopy(nodeptr& p)
 {
 	nodeptr temp;
@@ -192,8 +223,31 @@ nodeptr nodecopy(nodeptr& p)
 		return temp;
 	}
 }
+void copy(nodeptr& p, nodeptr& p1)
+{
+	makeempty(p1);
+	p1 = nodecopy(p);
+}
 
-// Deleting a node
+
+
+int deletemin(nodeptr& p)
+{
+	int c;
+	cout << "Выбрано удаление минимального значения\n" << endl;
+	if (p->left == NULL)
+	{
+		c = p->element;
+		p = p->right;
+		return c;
+	}
+	else
+	{
+		c = deletemin(p->left);
+		return c;
+	}
+}
+
 void del(int x, nodeptr& p)
 {
 	nodeptr d;
@@ -236,22 +290,7 @@ void del(int x, nodeptr& p)
 	}
 }
 
-int deletemin(nodeptr& p)
-{
-	int c;
-	cout << "Выбрано удаление минимального значения\n" << endl;
-	if (p->left == NULL)
-	{
-		c = p->element;
-		p = p->right;
-		return c;
-	}
-	else
-	{
-		c = deletemin(p->left);
-		return c;
-	}
-}
+
 void preorder(nodeptr p)
 {
 	if (p != NULL)
@@ -284,66 +323,9 @@ void postorder(nodeptr p)
 	}
 }
 
-int max(int value1, int value2)
-{
-	return ((value1 > value2) ? value1 : value2);
-}
-int bsheight(nodeptr p)
-{
-	int t;
-	if (p == NULL)
-	{
-		return -1;
-	}
-	else
-	{
-		t = p->height;
-		return t;
-	}
-}
 
-nodeptr srl(nodeptr& p1)
-{
-	nodeptr p2;
-	p2 = p1->left;
-	p1->left = p2->right;
-	p2->right = p1;
-	p1->height = max(bsheight(p1->left), bsheight(p1->right)) + 1;
-	p2->height = max(bsheight(p2->left), p1->height) + 1;
-	return p2;
-}
-nodeptr srr(nodeptr& p1)
-{
-	nodeptr p2;
-	p2 = p1->right;
-	p1->right = p2->left;
-	p2->left = p1;
-	p1->height = max(bsheight(p1->left), bsheight(p1->right)) + 1;
-	p2->height = max(p1->height, bsheight(p2->right)) + 1;
-	return p2;
-}
-nodeptr drl(nodeptr& p1)
-{
-	p1->left = srr(p1->left);
-	return srl(p1);
-}
-nodeptr drr(nodeptr& p1)
-{
-	p1->right = srl(p1->right);
-	return srr(p1);
-}
 
-int nonodes(nodeptr p)
-{
-	int count = 0;
-	if (p != NULL)
-	{
-		nonodes(p->left);
-		nonodes(p->right);
-		count++;
-	}
-	return count;
-}
+
 
 void print_Tree(nodeptr node, int level)
 {
@@ -358,7 +340,7 @@ void print_Tree(nodeptr node, int level)
 
 int main()
 {
-	
+
 	nodeptr root, root1, min, max;//,flag;
 	int a, choice, findele, delele;
 	char ch = 'y';
@@ -370,7 +352,7 @@ int main()
 
 	do
 	{
-		
+
 		cout << "1 Вставить новый узел" << endl;
 		cout << "2 Найти минимальный элемент" << endl;
 		cout << "3 Найти максимальный элемент" << endl;
@@ -381,7 +363,7 @@ int main()
 		cout << "8 Вариант обхода3" << endl;
 		cout << "9 Показать высоту дерева" << endl;
 		cout << "0 Выход" << endl;
-		
+
 
 		cout << "\nВыберите нужное действие и нажмите Enter: ";
 		cin >> choice;
@@ -391,11 +373,11 @@ int main()
 		case 1:
 			for (size_t i = 1; i < 9; i++)
 			{
-				srand(time(0)/i);
-				a = rand()%20+1;
+				srand(time(0) / i);
+				a = rand() % 20 + 1;
 				insert(a, root);
 			}
-			
+
 			cout << "\nНовый элемент добавлен успешно\n" << endl;
 			break;
 		case 2:
@@ -454,7 +436,7 @@ int main()
 			print_Tree(root, a);
 
 			break;
-		
+
 		default:
 			cout << "Sorry! wrong input\n" << endl;
 			break;
